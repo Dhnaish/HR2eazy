@@ -42,6 +42,7 @@ public class ApplyLeave {
     public void ApplyLeaveIconCLick() {
     	ClaimApplyPage claimApplyPage = new ClaimApplyPage(driver);
     	claimApplyPage.ClickAction(applyLeaveicon);
+		
 
 	}
     
