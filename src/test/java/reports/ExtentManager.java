@@ -5,27 +5,25 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 public class ExtentManager {
 
-	  public static ExtentReports extent;
+    private static ExtentReports extent;
 
-	    public static ExtentReports getInstance() {
+    public static ExtentReports getInstance() {
 
-	        if (extent == null) {
+        if (extent == null) {
 
-	            ExtentSparkReporter spark =
-	                    new ExtentSparkReporter("test-output/SparkReport.html");
+            ExtentSparkReporter spark =
+                    new ExtentSparkReporter("test-output/SparkReport.html");
 
-	            spark.config().setOfflineMode(true);  // Add here
+            spark.config().setOfflineMode(true);
 
-	            extent = new ExtentReports();
-	            extent.attachReporter(spark);
-	        }
+            extent = new ExtentReports();
+            extent.attachReporter(spark);
+        }
 
-	        return extent;
-	    }
+        return extent;
+    }
 
-		public static ExtentReports getReport() {
-			// TODO Auto-generated method stub
-			 return getInstance();
-		}
-	
+    public static ExtentReports getReport() {
+        return getInstance();
+    }
 }
