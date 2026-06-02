@@ -291,7 +291,7 @@ public class ClaimApplyPage {
 
         String filePath =
                 System.getProperty("user.dir")
-                        + "\\src\\test\\resources\\dummy-pdf_2.pdf";
+                        + "/src/test/resources/dummy-pdf_2.pdf";
 
         File file = new File(filePath);
 
