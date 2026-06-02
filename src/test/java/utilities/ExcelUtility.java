@@ -13,7 +13,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelUtility {
 	public static String getData(int row, int cell) throws IOException {
 
-	    FileInputStream file = new FileInputStream("src/test/resources/TestingDatas.xlsx");
+	     InputStream file = ExcelUtility.class
+            .getClassLoader()
+            .getResourceAsStream("TestingDatas.xlsx");
 
 	    XSSFWorkbook workbook = new XSSFWorkbook(file);
 
