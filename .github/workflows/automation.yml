@@ -2,12 +2,9 @@ name: HR2eazy Automation
 
 on:
   push:
-    branches:
-      - main
-
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   test:
@@ -20,16 +17,22 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: temurin
+          java-version: 17
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: maven-${{ hashFiles('**/pom.xml') }}
 
       - name: Build Project
         run: mvn clean compile
 
-      - name: Run TestNG Suite
-        run: mvn clean test -DsuiteXmlFile=testng.xml
+      - name: Run Tests
+        run: mvn test -DsuiteXmlFile=testng.xml
 
-       - name: Show Test Output (Debug Step)
+      - name: Show Test Output (Debug Step)
         if: always()
         run: ls -R test-output || true
 
