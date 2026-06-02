@@ -2,7 +2,6 @@ package utilities;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -12,40 +11,32 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelUtility {
-	public static String getData(int row, int cell) throws IOException {
 
-	 String excelPath = System.getProperty("user.dir") + "//src/test/resources/TestingDatas.xlsx";
+    private static final String EXCEL_PATH =
+            System.getProperty("user.dir") + "/src/test/resources/TestingDatas.xlsx";
 
-		FileInputStream file = new FileInputStream(excelPath);
+    public static String getData(int row, int cell) throws IOException {
 
-	    XSSFWorkbook workbook = new XSSFWorkbook(file);
+        try (FileInputStream file = new FileInputStream(EXCEL_PATH);
+             XSSFWorkbook workbook = new XSSFWorkbook(file)) {
 
-	    XSSFSheet sheet = workbook.getSheet("Sheet1");
+            XSSFSheet sheet = workbook.getSheet("Sheet1");
 
-	    DataFormatter formatter = new DataFormatter();
+            DataFormatter formatter = new DataFormatter();
 
-	    String data = formatter.formatCellValue(
-	            sheet.getRow(row).getCell(cell));
-
-	    workbook.close();
-
-	    return data;
+            return formatter.formatCellValue(
+                    sheet.getRow(row).getCell(cell));
+        }
     }
 
+    public static int getRowCount() throws IOException {
 
-public static int getRowCount() throws IOException {
-	String excelPath = System.getProperty("user.dir") + "//src/test/resources/TestingDatas.xlsx";
+        try (FileInputStream file = new FileInputStream(EXCEL_PATH);
+             Workbook workbook = WorkbookFactory.create(file)) {
 
-		FileInputStream file = new FileInputStream(excelPath);
-    
-    Workbook wb = WorkbookFactory.create(fis);
-    Sheet sheet = wb.getSheetAt(0);
+            Sheet sheet = workbook.getSheetAt(0);
 
-    int rowCount = sheet.getLastRowNum(); // excluding header
-
-    wb.close();
-    fis.close();
-
-    return rowCount;
-}
+            return sheet.getLastRowNum();
+        }
+    }
 }
