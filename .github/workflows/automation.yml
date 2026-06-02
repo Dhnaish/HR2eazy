@@ -29,11 +29,13 @@ jobs:
       - name: Run TestNG Suite
         run: mvn clean test -DsuiteXmlFile=testng.xml
 
-      - name: Upload Test Reports
+       - name: Show Test Output (Debug Step)
+        if: always()
+        run: ls -R test-output || true
+
+      - name: Upload Extent Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Test-Reports
-          path: |
-            test-output/
-            Reports/
+          name: Extent-Report
+          path: test-output/
