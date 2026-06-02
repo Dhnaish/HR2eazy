@@ -17,7 +17,7 @@ public class BaseClass {
 
 	@BeforeMethod
 	public void setUp() throws Exception {
-
+		System.out.println("Before Method");
 	    // Setup ChromeDriver
 	    WebDriverManager.chromedriver().setup();
 
