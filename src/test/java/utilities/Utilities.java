@@ -11,11 +11,18 @@ public class Utilities {
 
 	public static Properties getProperty() throws IOException {
 
-		prop = new Properties();
-		FileInputStream file = new FileInputStream("src\\test\\resources\\config.properties");
-		prop.load(file);
-		return prop;
-	}
+    Properties prop = new Properties();
+
+    String configPath = System.getProperty("user.dir")
+            + "/src/test/resources/config.properties";
+
+    FileInputStream file = new FileInputStream(configPath);
+
+    prop.load(file);
+    file.close();
+
+    return prop;
+}
 	
 	 @DataProvider(name = "leaveData")
 	 public Object[][] leaveData() throws Exception {
