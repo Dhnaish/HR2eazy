@@ -34,7 +34,10 @@ public class ExcelUtility {
 
 
 public static int getRowCount() throws IOException {
-    FileInputStream fis = new FileInputStream("src\\test\\resources\\TestingDatas.xlsx");
+	String excelPath = System.getProperty("user.dir") + "/TestingDatas.xlsx";
+
+		FileInputStream file = new FileInputStream(excelPath);
+    
     Workbook wb = WorkbookFactory.create(fis);
     Sheet sheet = wb.getSheetAt(0);
 
