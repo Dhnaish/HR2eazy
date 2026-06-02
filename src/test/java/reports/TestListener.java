@@ -21,17 +21,25 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        test.get().pass("Test Passed");
+        if (test.get() != null) {
+            test.get().pass("Test Passed");
+        }
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        test.get().fail(result.getThrowable());
+        if (test.get() != null) {
+            test.get().fail(result.getThrowable());
+        } else {
+            System.out.println("ExtentTest is NULL in onTestFailure: " + result.getName());
+        }
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        test.get().skip("Test Skipped");
+        if (test.get() != null) {
+            test.get().skip("Test Skipped");
+        }
     }
 
     @Override
