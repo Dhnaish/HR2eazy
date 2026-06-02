@@ -14,7 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelUtility {
 	public static String getData(int row, int cell) throws IOException {
 
-	 String excelPath = System.getProperty("user.dir") + "/TestingDatas.xlsx";
+	 String excelPath = System.getProperty("user.dir") + "//src/test/resources/TestingDatas.xlsx";
 
 		FileInputStream file = new FileInputStream(excelPath);
 
@@ -34,7 +34,7 @@ public class ExcelUtility {
 
 
 public static int getRowCount() throws IOException {
-	String excelPath = System.getProperty("user.dir") + "/TestingDatas.xlsx";
+	String excelPath = System.getProperty("user.dir") + "//src/test/resources/TestingDatas.xlsx";
 
 		FileInputStream file = new FileInputStream(excelPath);
     
