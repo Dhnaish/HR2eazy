@@ -55,6 +55,11 @@ jobs:
           name: Extent-Report
           path: test-output/
 
+      - name: Create ZIP Report
+        if: always()
+        run: |
+          zip -r Extent-Report.zip test-output/
+
       - name: Send Extent Report via Email
         if: always()
         uses: dawidd6/action-send-mail@v3
@@ -74,4 +79,4 @@ jobs:
 
             Regards,
             GitHub Actions
-          attachments: test-output/ExtentReport.html
+          attachments: Extent-Report.zip
