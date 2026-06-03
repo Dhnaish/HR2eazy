@@ -3,7 +3,7 @@ name: HR2eazy Automation
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/5 * * * *'   
+    - cron: '5 11 * * *'   
 
   # push:
   #   branches:
