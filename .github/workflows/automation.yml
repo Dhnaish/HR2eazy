@@ -55,10 +55,7 @@ jobs:
           name: Extent-Report
           path: test-output/
 
-      - name: Create ZIP Report
-        if: always()
-        run: |
-          zip -r Extent-Report.zip test-output/
+     
 
       - name: Send Extent Report via Email
         if: always()
@@ -75,8 +72,17 @@ jobs:
           body: |
             Hi Team,
 
-            Please find the attached automation execution report.
+             Automation execution has completed.
+
+            Repository:
+            https://github.com/${{ github.repository }}
+
+            Workflow Run:
+            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            Download Artifact:
+            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts
 
             Regards,
             GitHub Actions
-          attachments: Extent-Report.zip
+         
