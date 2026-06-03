@@ -50,6 +50,7 @@ jobs:
 
       - name: Upload Extent Report
         if: always()
+        id: upload_report
         uses: actions/upload-artifact@v4
         with:
           name: Extent-Report
@@ -66,7 +67,7 @@ jobs:
           secure: true
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: HR2eazy Automation Test Report
+          subject: HR2eazy Automation Test Report - Run #${{ github.run_number }}
           to: sathishkumar@iscistech.net
           from: ${{ secrets.EMAIL_USERNAME }}
           body: |
@@ -80,8 +81,11 @@ jobs:
             Workflow Run:
             https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
-            Download Artifact:
-            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts
+            Artifact ID:
+            ${{ steps.upload_report.outputs.artifact-id }}
+
+            Artifact Download:
+            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/${{ steps.upload_report.outputs.artifact-id }}
 
             Regards,
             GitHub Actions
