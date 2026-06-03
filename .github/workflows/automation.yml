@@ -47,8 +47,8 @@ jobs:
         run: mvn clean compile
 
       - name: Run Tests
-        run: mvn test -DsuiteXmlFile=testng.xml -Duser.timezone=Asia/Kolkata
-
+        # run: mvn test -DsuiteXmlFile=testng.xml -Duser.timezone=Asia/Kolkata
+          run: mvn test -DsuiteXmlFile=testng.xml
       - name: Show Test Output (Debug Step)
         if: always()
         run: ls -R test-output || true
