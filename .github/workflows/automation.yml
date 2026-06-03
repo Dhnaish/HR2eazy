@@ -3,7 +3,7 @@ name: HR2eazy Automation
 on:
   workflow_dispatch:
   schedule:
-    - cron: '50 6 * * *'   # 12:20 PM IST (06:50 UTC)
+    - cron: '*/5 * * * *'   
 
 jobs:
   test:
