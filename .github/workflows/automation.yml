@@ -3,14 +3,7 @@ name: HR2eazy Automation
 on:
   workflow_dispatch:
   schedule:
-    - cron: '45 6 * * *'  
-  
-  # push:
-  #   branches:
-  #     - main
-  # pull_request:
-  #   branches:
-  #     - main
+    - cron: '50 6 * * *'   # 12:20 PM IST (06:50 UTC)
 
 jobs:
   test:
@@ -37,7 +30,7 @@ jobs:
 
       - name: Verify Timezone
         run: |
-          echo "Current timezone:"
+          echo "Current date & time:"
           date
           timedatectl || true
 
@@ -59,8 +52,6 @@ jobs:
           name: Extent-Report
           path: test-output/
 
-     
-
       - name: Send Extent Report via Email
         if: always()
         uses: dawidd6/action-send-mail@v3
@@ -76,7 +67,7 @@ jobs:
           body: |
             Hi Team,
 
-             Automation execution has completed.
+            Automation execution has completed.
 
             Repository:
             https://github.com/${{ github.repository }}
@@ -87,9 +78,5 @@ jobs:
             Artifact ID:
             ${{ steps.upload_report.outputs.artifact-id }}
 
-            Artifact Download:
-            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/${{ steps.upload_report.outputs.artifact-id }}
-
             Regards,
             GitHub Actions
-         
