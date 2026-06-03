@@ -71,7 +71,7 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: HR2eazy Automation Test Report - Run #${{ github.run_number }}
-          to: sathishkumar@iscistech.net,dhanish@iscistech.net
+          to: sathishkumar@iscistech.net,dhanish@iscistech.net,vishnu@iscistech.net
           from: ${{ secrets.EMAIL_USERNAME }}
           body: |
             Hi Team,
