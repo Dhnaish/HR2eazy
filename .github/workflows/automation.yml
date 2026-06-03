@@ -3,16 +3,14 @@ name: HR2eazy Automation
 on:
   workflow_dispatch:
   schedule:
-    - cron: '5 11 * * *'   
-
+    - cron: '5 11 * * *'  
+  
   # push:
   #   branches:
   #     - main
   # pull_request:
   #   branches:
   #     - main
-
-    
 
 jobs:
   test:
@@ -39,7 +37,7 @@ jobs:
 
       - name: Verify Timezone
         run: |
-          echo "Current date & time:"
+          echo "Current timezone:"
           date
           timedatectl || true
 
@@ -47,8 +45,8 @@ jobs:
         run: mvn clean compile
 
       - name: Run Tests
-        # run: mvn test -DsuiteXmlFile=testng.xml -Duser.timezone=Asia/Kolkata
-          run: mvn test -DsuiteXmlFile=testng.xml
+        run: mvn test -DsuiteXmlFile=testng.xml -Duser.timezone=Asia/Kolkata
+
       - name: Show Test Output (Debug Step)
         if: always()
         run: ls -R test-output || true
@@ -60,6 +58,8 @@ jobs:
         with:
           name: Extent-Report
           path: test-output/
+
+     
 
       - name: Send Extent Report via Email
         if: always()
@@ -76,7 +76,7 @@ jobs:
           body: |
             Hi Team,
 
-            Automation execution has completed.
+             Automation execution has completed.
 
             Repository:
             https://github.com/${{ github.repository }}
@@ -86,6 +86,9 @@ jobs:
 
             Artifact ID:
             ${{ steps.upload_report.outputs.artifact-id }}
+
+            Artifact Download:
+            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/${{ steps.upload_report.outputs.artifact-id }}
 
             Regards,
             GitHub Actions
